@@ -1,0 +1,160 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  /* font: 15px/1.5 Arial, Helvetica, sans-serif; */
+  padding: 0;
+  margin: 0;
+  background-color: #f4f4f4;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #35424a;
+  color: #ffffff;
+  padding-top: 30px;
+  min-height: 70px;
+  border-bottom: #028BC0 3px solid;
+}
+
+header a {
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+header li {
+  float: left;
+  display: inline;
+  padding: 0 20px 0 20px;
+}
+
+header .btn-nav a {
+  font-size: 12px;
+  height: 38px;
+  margin-right: 0px;
+  background-color: #028BC0;
+  padding: 10px 20px 10px 20px;
+  color: #ffffff;
+}
+
+header #logo {
+  float: left;
+}
+
+header #logo h1 {
+  margin: 0;
+}
+
+header nav {
+  float: right;
+  margin-top: 10px;
+}
+
+header .highlight, header .current a {
+  color: #028BC0;
+  font-weight: bold;
+}
+
+header a:hover {
+  color: #cccccc;
+  font-weight: bold;
+}
+
+#fileupload {
+  padding: 15px;
+  background-color: #35424a;
+  color: #ffffff;
+}
+
+#fileupload h1 {
+  float: left;
+  font-size: 25px;
+}
+
+#fileupload form {
+  float: right;
+  margin-top: 20px;
+}
+
+#fileupload input[type="email"] {
+  padding: 4px;
+  width: 250px;
+  height: 25px;
+}
+
+.btn {
+  height: 38px;
+  background-color: #028BC0;
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #ffffff;
+}
+
+.file {
+  border-bottom: 5px solid #35424a;
+}
+
+footer {
+  margin-top: 20px;
+  padding: 15px;
+  text-align: center;
+  background-color: #028BC0;
+  color: #ffffff;
+}
+
+.center {
+  text-align: center;
+}
+
+.container-form {
+  width: 50%;
+  height: 500px;
+  background-color: #028BC0;
+  margin: auto;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 20px;
+}
+
+.container-form h2 {
+  padding-top: 40px;
+}
+
+.container-form input {
+  display: block;
+  margin: 20px auto;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  width: 250px;
+  height: 25px;
+}
+
+.container-form .btn-1 {
+  display: block;
+  margin: 0 auto;
+  height: 38px;
+  background-color: #35424a;
+  border: none;
+  padding: 0 30px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.container-form a {
+  color: #ffffff;
+  text-decoration: none;
+}
