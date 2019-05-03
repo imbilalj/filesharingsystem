@@ -107,34 +107,33 @@
               </div>
               <div class="panel-body">
                 <div class="row">
-                      <div class="col-md-8">
-                          <input class="form-control" type="text" placeholder="Filter Users...">
-                      </div>
-                      <div class="col-md-4">
-                        <a class="btn btn-primary" href="create-user.php" role="button">Create User</a>
+                      <div class="col-md-12">
+                        <form action="add-user.php" method="POST">
+                          <div class="form-group">
+                            <label for="firstname">First Name</label>
+                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter First Name" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="lastname">Last Name</label>
+                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter Last Name" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="cpassword">Password</label>
+                            <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm Password" required>
+                          </div>
+                          <button type="submit" class="btn btn-primary">Create User</button>
+                        </form>
                       </div>
                 </div>
                 <br>
-                <table class="table table-striped table-hover">
-                      <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th></th>
-                      </tr>
-                      <?php
-                        if($userData->num_rows > 0) {
-                          while($row = $userData->fetch_assoc()) {
-                            ?>
-                            <tr>
-                              <td><?php echo $row['firstname']. " ". $row['lastname']; ?></td>
-                              <td><?php echo $row['email']; ?></td>
-                              <td><a class="btn btn-default" href="edit.html">Edit</a> <a class="btn btn-danger" href="delete-user.php?id=<?php echo $row['user_id']; ?>">Delete</a></td>
-                            </tr>
-                            <?php
-                          }
-                        }
-                      ?>
-                    </table>
               </div>
               </div>
 

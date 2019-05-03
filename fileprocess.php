@@ -50,12 +50,12 @@
 
       if(isset($_SESSION['user_id'])) {
         //SQL query for users
-        $sql = "INSERT INTO files(user_id, uploaddate, file_name) VALUES('$_SESSION['user_id']','$date', ";
+        $sql = "INSERT INTO files(user_id, admin_id, uploaddate, file_name) VALUES('$_SESSION['user_id']', NULL, '$date', ";
       }
       
       if(isset($_SESSION['admin_id'])) {
         //SQL Query for admin
-        $sql = "INSERT INTO files(admin_id, uploaddate, file_name) VALUES('$_SESSION['admin_id']','$date', ";
+        $sql = "INSERT INTO files(user_id, admin_id, uploaddate, file_name) VALUES(NULL, '$_SESSION['admin_id']','$date', ";
       }
       
     
