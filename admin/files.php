@@ -23,7 +23,6 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
-    <script src="http://cdn.ckeditor.com/4.6.1/standard/ckeditor.js"></script>
   </head>
   <body>
 
@@ -118,12 +117,36 @@
                         <th>Upload Date</th>
                         <th></th>
                       </tr>
+                      <?php
+                        if($fileData->num_rows > 0) {
+                          while($row = $fileData->fetch_assoc()) {
+                      ?>
                       <tr>
-                        <td>resume.pdf</td>
-                        <td>Bilal</td>
-                        <td>March 12, 2019</td>
-                        <td><a class="btn btn-default" href="edit.html">Edit</a> <a class="btn btn-danger" href="#">Delete</a></td>
+                        <td><?php echo $row['title']; ?></td>
+                        <td>
+                          <?php
+                            if(is_null($row['user_id'])) {
+                              $user = 'Admin';
+                              echo $user;
+                            } else {
+                              $user = getUserNameById($row['user_id']);
+                              echo $user;
+                            }
+                          ?>
+                        </td>
+                        <td>
+                          <?php
+                            $time = strtotime($row['uploaddate']);
+                            $uploadtime = date("m/d/y g:i A", $time);
+                            echo $uploadtime;
+                          ?>
+                        </td>
+                        <td><a class="btn btn-default" href="edit.html">Edit</a> <a class="btn btn-danger" href="delete-file.php?id=<?php echo $row['file_id']; ?>">Delete</a></td>
                       </tr>
+                      <?php
+                          }
+                        }
+                      ?>
                     </table>
               </div>
               </div>

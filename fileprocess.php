@@ -5,76 +5,80 @@
     header('Location: index.php');
     exit();
   }
+
+  require_once("db-connect.php");
   
   if(isset($_POST)) {
-    if(isset($_POST)) {
 
-      $uploadOk = true;
+    $title = mysqli_real_escape_string($conn, $_POST['title']);
+    $description = mysqli_real_escape_string($conn, $_POST['description']);
+
+    $uploadOk = true;
     
-      if(isset($_FILES)) {
+    if(isset($_FILES)) {
     
-        $folder_dir = "user-uploads/";
+      $folder_dir = "user-uploads/";
     
-        $base = basename($_FILES['newupload']['name']);
+      $base = basename($_FILES['newupload']['name']);
     
-        $fileType = pathinfo($base, PATHINFO_EXTENSION); 
+      $fileType = pathinfo($base, PATHINFO_EXTENSION); 
     
-        $file = uniqid() . "." . $fileType;   
+      $file = uniqid() . "." . $fileType;   
     
-        $filename = $folder_dir .$file;  
+      $filename = $folder_dir .$file;  
     
-        if(file_exists($_FILES['newupload']['tmp_name'])) { 
+      if(file_exists($_FILES['newupload']['tmp_name'])) { 
           
-          if($fileType == "pdf")  {
+        if($fileType == "pdf")  {
     
-            if($_FILES['newupload']['size'] < 500000) {
+          if($_FILES['newupload']['size'] < 500000) {
     
-              move_uploaded_file($_FILES["newupload"]["tmp_name"], $filename);
+            move_uploaded_file($_FILES["newupload"]["tmp_name"], $filename);
     
-            } else {
-              $_SESSION['uploadError'] = "File too large. Max Size Allowed : 5MB";
-              header("Location: archive.php");
-              exit();
-            }
           } else {
-            $_SESSION['uploadError'] = "Wrong Format. Only PDF Allowed";
+            $_SESSION['uploadError'] = "File too large. Max Size Allowed : 5MB";
             header("Location: archive.php");
             exit();
           }
+        } else {
+          $_SESSION['uploadError'] = "Wrong Format. Only PDF Allowed";
+          header("Location: archive.php");
+          exit();
         }
-      } else {
-        $uploadOk = false;
       }
-
-      $date = date('Y-m-d H:i:s');
-
-      if(isset($_SESSION['user_id'])) {
-        //SQL query for users
-        $sql = "INSERT INTO files(user_id, admin_id, uploaddate, file_name) VALUES('$_SESSION['user_id']', NULL, '$date', ";
-      }
-      
-      if(isset($_SESSION['admin_id'])) {
-        //SQL Query for admin
-        $sql = "INSERT INTO files(user_id, admin_id, uploaddate, file_name) VALUES(NULL, '$_SESSION['admin_id']','$date', ";
-      }
-      
-    
-      if($uploadOk == true) {
-        $sql .= "'$file')";
-      }
-    
-      if($conn->query($sql) === TRUE) {
-        $_SESSION['uploadSuccess'] = 'File Upload Successfully!';
-        header("Location: archive.php");
-        exit();
-      } else {
-        echo "Error ". $sql . "<br>" . $conn->error;
-      }
-      $conn->close();
-    
     } else {
+      $uploadOk = false;
+    }
+
+    $date = date('Y-m-d H:i:s');
+
+    if(isset($_SESSION['user_id'])) {
+      //SQL query for users
+      $sql = "INSERT INTO files(title, description, user_id, admin_id, uploaddate, file_name) VALUES('". $title. "', '". $description . "', " . $_SESSION['user_id']. ", NULL, '" . $date . "', ";
+    }
+      
+    if(isset($_SESSION['admin_id'])) {
+      //SQL Query for admin
+      $sql = "INSERT INTO files(title, description, user_id, admin_id, uploaddate, file_name) VALUES('". $title. "', '". $description . "', NULL, " . $_SESSION['admin_id']. ", '" . $date . "', ";
+    }
+      
+    
+    if($uploadOk == true) {
+      $sql .= "'". $file . "')";
+    }
+    
+    if($conn->query($sql) === TRUE) {
+      $_SESSION['uploadSuccess'] = 'File Upload Successfully!';
       header("Location: archive.php");
       exit();
+    } else {
+      echo "Error ". $sql . "<br>" . $conn->error;
     }
+    
+    $conn->close();
+    
+  } else {
+    header("Location: archive.php");
+    exit();
   }
 ?>

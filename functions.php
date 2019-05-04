@@ -3,9 +3,9 @@
   include("db-connect.php");
 
   // Function to return number of Users, Files
-  function countData($column) {
+  function countData($table) {
     global $conn;
-    $sql = "SELECT * FROM". " " . $column;
+    $sql = "SELECT * FROM". " " . $table;
     $result = $conn->query($sql);
     if($result->num_rows > 0) {
       $totalno = $result->num_rows;
@@ -25,9 +25,23 @@
 
   function getFileData() {
     global $conn;
-    $sql = "SELECT filename, uploaddate, uploadedby FROM files";
+    $sql = "SELECT * FROM files";
     $result = $conn->query($sql);
     return $result;
+  }
+
+  //Returns full name by ID
+  function getUserNameById($id) {
+    global $conn;
+    $name = "";
+    $sql = "SELECT firstname, lastname FROM users WHERE user_id=" . $id;
+    $result = $conn->query($sql);
+    if($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) {
+        $name = $row["firstname"] . " " . $row["lastname"];
+      }
+    }
+    return $name;
   }
 
 ?>

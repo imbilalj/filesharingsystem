@@ -79,22 +79,47 @@ header a:hover {
 }
 
 #fileupload h1 {
-  float: left;
+  display: block;
   font-size: 25px;
 }
 
+#fileupload .success {
+  border: 3px solid green;
+}
+
+#fileupload .failed {
+  border: 3px solid red;
+}
+
 #fileupload form {
-  float: right;
+  display: block;
   margin-top: 20px;
 }
 
-#fileupload input[type="email"] {
+#fileupload input[type=text] {
+  margin: 10px;
+  display: block;
   padding: 4px;
   width: 250px;
   height: 25px;
 }
 
+#fileupload label {
+  margin: 10px;
+}
+
+#fileupload textarea {
+  display: block;
+  margin: 10px;
+}
+
+#fileupload input[type=file] {
+  display: block;
+  margin: 10px;
+}
+
 .btn {
+  margin: 10px;
   height: 38px;
   background-color: #028BC0;
   border: none;
